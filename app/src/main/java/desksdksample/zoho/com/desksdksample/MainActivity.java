@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable ZDOrganizationList zdOrganizationList) {
                 if (zdOrganizationList != null && zdOrganizationList.getData().size() > 1) {
-                    mOrgId = zdOrganizationList.getData().get(3).getId();
+                    mOrgId = zdOrganizationList.getData().get(0).getId();
                     initList();
                     mViewModel.getViewsList(mOrgId, mDepartment, mModule);
                     mViewModel.getProfileDetail();
