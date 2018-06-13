@@ -1,0 +1,4 @@
+include ':app'
+
+//include ':external'
+//project(':external').projectDir=new File('/Users/mohan-zt105/Documents/Work/Merge/temp/TTTdesk-supporsdk/library')

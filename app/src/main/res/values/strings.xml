@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">DeskSDKSample</string>
+    <string name="action_settings">Settings</string>
+    <string name="c_id">1000.3SODEKJR9QTA77165D0TANT7UCYFU8</string>
+    <string name="c_secret">2afab8ff7b59d4d340054f6fb96a79ea4df2793a75</string>
+
+    <string name="redirect_url">supportsdk://</string>
+    <string name="accounts_url">https://accounts.zoho.com</string>
+    <string name="enable.logs">true</string>
+    <string name="is.debug">true</string>
+    <string name="title_activity_main2">Ticket List</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main3">Main3Activity</string>
+    <string name="sign_out">Sign out</string>
+    <string name="zd_views">Views</string>
+    <string name="zd_ticket_detail">Ticket Detail</string>
+</resources>
