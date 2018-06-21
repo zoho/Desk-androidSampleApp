@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.mOrganizationList.observe(this, new Observer<ZDOrganizationList>() {
             @Override
             public void onChanged(@Nullable ZDOrganizationList zdOrganizationList) {
-                if (zdOrganizationList != null && zdOrganizationList.getData().size() > 1) {
+                if (zdOrganizationList != null && zdOrganizationList.getData().size() >= 1) {
                     mOrgId = zdOrganizationList.getData().get(0).getId();
                     initList();
                     mViewModel.getViewsList(mOrgId, mDepartment, mModule);
