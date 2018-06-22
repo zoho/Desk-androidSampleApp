@@ -4,7 +4,7 @@
     <string name="c_id">YOUR C_ID</string>
     <string name="c_secret">YOUR C_SECRET</string>
 
-    <string name="redirect_url">supportsdk://</string>
+    <string name="redir_url">supportsdk://</string>
     <string name="accounts_url">https://accounts.zoho.com</string>
     <string name="enable.logs">true</string>
     <string name="is.debug">true</string>
