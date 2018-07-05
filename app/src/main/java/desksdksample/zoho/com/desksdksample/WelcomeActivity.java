@@ -11,6 +11,8 @@ import com.zoho.accounts.externalframework.ZohoSDK;
 import com.zoho.accounts.externalframework.ZohoToken;
 import com.zoho.accounts.externalframework.ZohoTokenCallback;
 
+import java.util.HashMap;
+
 /**
  * Created by mohan-zt105 on 28/05/18.
  */
@@ -20,6 +22,8 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        HashMap<String,String> mParam = new HashMap<String, String>();
+        mParam.put("logout","true");
         ZohoSDK sdk =  ZohoSDK.getInstance(getApplicationContext());
         if (!sdk.isUserSignedIn()) {
             sdk.presentLoginScreen(this, new ZohoTokenCallback() {
@@ -39,7 +43,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 public void onTokenFetchFailed(ZohoErrorCodes zohoErrorCodes) {
                     // On login failed - onTokenFetch failed
                 }
-            },null);
+            },mParam);
         }else {
             // this block will called on user logged in, will take to MainActivity
             startActivity(new Intent(WelcomeActivity.this, MainActivity.class));

@@ -50,5 +50,5 @@ dependencies {
     // Add the below dependencies for Zoho desk UI library
     implementation 'com.zoho:deskui:0.1'
     // Add the below dependencies for Zoho Account
-    implementation 'com.zoho.accounts.android:zaccountssdk:V0_1'
+    implementation 'com.zoho.accounts.android:zaccountssdk:V0_2'
 }
