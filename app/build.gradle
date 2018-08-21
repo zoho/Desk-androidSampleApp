@@ -37,6 +37,10 @@ android {
             abortOnError false
         }
     }
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+    }
 }
 
 dependencies {
@@ -48,7 +52,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     // Add the below dependencies for Zoho desk UI library
-    implementation 'com.zoho:deskui:0.1'
+    implementation 'com.zoho:deskui:0.2.8'
     // Add the below dependencies for Zoho Account
     implementation 'com.zoho.accounts.android:zaccountssdk:V0_2'
 }
