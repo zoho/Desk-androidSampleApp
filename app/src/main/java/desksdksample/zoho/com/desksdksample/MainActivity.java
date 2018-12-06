@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.zoho.accounts.externalframework.ZohoSDK;
 import com.zoho.desksdk.organizations.ZDOrganizationList;
-import com.zoho.desksdk.profile.ZDProfiles;
+import com.zoho.desksdk.profile.ZDIAMProfiles;
 import com.zoho.desksdk.tickets.ZDTicket;
 import com.zoho.desksdk.utils.ZDClickListener;
 import com.zoho.desksdk.utils.ZDErrorData;
@@ -160,9 +160,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Observes the Profile Details
-        mViewModel.mProfile.observe(this, new Observer<ZDProfiles>() {
+        mViewModel.mProfile.observe(this, new Observer<ZDIAMProfiles>() {
             @Override
-            public void onChanged(final @Nullable ZDProfiles zdProfiles) {
+            public void onChanged(final @Nullable ZDIAMProfiles zdProfiles) {
                 if (zdProfiles != null) {
                     final ImageView profilePicture = findViewById(R.id.profile_pic);
                     mViewModel.downloadProfilePicture(zdProfiles.getProfile().getPrimary_email());

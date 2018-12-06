@@ -9,7 +9,7 @@ import com.zoho.desksdk.callbacks.ZDCallback;
 import com.zoho.desksdk.callbacks.ZDResult;
 import com.zoho.desksdk.exceptions.ZDBaseException;
 import com.zoho.desksdk.organizations.ZDOrganizationList;
-import com.zoho.desksdk.profile.ZDProfiles;
+import com.zoho.desksdk.profile.ZDIAMProfiles;
 import com.zoho.desksdk.utils.ZDUtilsKt;
 import com.zoho.desksdk.views.ZDViewsList;
 
@@ -25,7 +25,7 @@ import retrofit2.Call;
 
 public class ViewsViewModel extends ViewModel {
     public MutableLiveData<ZDViewsList> mViewsList = new MutableLiveData<>();
-    public MutableLiveData<ZDProfiles> mProfile = new MutableLiveData<>();
+    public MutableLiveData<ZDIAMProfiles> mProfile = new MutableLiveData<>();
     public MutableLiveData<ResponseBody> mProfilePic = new MutableLiveData<>();
     public MutableLiveData<ZDOrganizationList> mOrganizationList = new MutableLiveData<>();
 
@@ -48,15 +48,15 @@ public class ViewsViewModel extends ViewModel {
     }
 
     public void getProfileDetail() {
-        ZDUtilsKt.getProfile(new ZDCallback<ZDProfiles>() {
+        ZDUtilsKt.getProfile(new ZDCallback<ZDIAMProfiles>() {
             @Override
-            public void onFailure(@Nullable Call<ZDProfiles> call, @NotNull ZDBaseException exception) {
+            public void onFailure(@Nullable Call<ZDIAMProfiles> call, @NotNull ZDBaseException exception) {
 
             }
 
             @Override
-            public void onSuccess(@NotNull ZDResult<? extends ZDProfiles> result) {
-                ZDProfiles profile = result.getData();
+            public void onSuccess(@NotNull ZDResult<? extends ZDIAMProfiles> result) {
+                ZDIAMProfiles profile = result.getData();
                 if (profile != null) {
                     mProfile.postValue(profile);
                 }
