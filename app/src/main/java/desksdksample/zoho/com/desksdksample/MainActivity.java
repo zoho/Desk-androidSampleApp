@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     void loadTicketList(ZDTicketListConfig config) {
         // Init method of ZDTicketList, which receives
         //life cycle owner ,
