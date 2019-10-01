@@ -10,6 +10,7 @@ import com.zoho.accounts.externalframework.ZohoErrorCodes;
 import com.zoho.accounts.externalframework.ZohoSDK;
 import com.zoho.accounts.externalframework.ZohoToken;
 import com.zoho.accounts.externalframework.ZohoTokenCallback;
+import com.zoho.desk.core.ZDeskSdk;
 
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         HashMap<String,String> mParam = new HashMap<String, String>();
         mParam.put("logout","true");
-        ZohoSDK sdk =  ZohoSDK.getInstance(getApplicationContext());
+        final ZohoSDK sdk =  ZohoSDK.getInstance(getApplicationContext());
         if (!sdk.isUserSignedIn()) {
             sdk.presentLoginScreen(this, new ZohoTokenCallback() {
                 @Override
@@ -37,6 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     //On login Success  -  onTokenFetch success
                     startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                     finish();
+                    ZDeskSdk.Companion.getInstance().setBaseUrl("https://desk.zoho.com");// No I18N
                 }
 
                 @Override
@@ -45,7 +47,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 }
             },mParam);
         }else {
-            // this block will called on user logged in, will take to MainActivity
+            ZDeskSdk.Companion.getInstance().setBaseUrl("https://desk.zoho.com");// No I18N
+            // this block will called on user logged in, will take to TicketListActivity
             startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
             finish();
         }

@@ -2,19 +2,19 @@ package desksdksample.zoho.com.desksdksample.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.zoho.desksdk.ZDOrganizationAPIHandler;
-import com.zoho.desksdk.ZDViewsAPIHandler;
-import com.zoho.desksdk.callbacks.ZDCallback;
-import com.zoho.desksdk.callbacks.ZDResult;
-import com.zoho.desksdk.exceptions.ZDBaseException;
-import com.zoho.desksdk.organizations.ZDOrganizationList;
-import com.zoho.desksdk.profile.ZDIAMProfiles;
-import com.zoho.desksdk.utils.ZDUtilsKt;
-import com.zoho.desksdk.views.ZDViewsList;
+import com.zoho.desk.provider.ZDViewsAPIHandler;
+import com.zoho.desk.provider.callbacks.ZDCallback;
+import com.zoho.desk.provider.callbacks.ZDResult;
+import com.zoho.desk.provider.exceptions.ZDBaseException;
+import com.zoho.desk.provider.organizations.ZDOrganizationList;
+import com.zoho.desk.provider.profile.ZDIAMProfiles;
+import com.zoho.desk.provider.utils.ZDUtilsKt;
+import com.zoho.desk.provider.views.ZDViewsList;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,34 +28,40 @@ public class ViewsViewModel extends ViewModel {
     public MutableLiveData<ZDIAMProfiles> mProfile = new MutableLiveData<>();
     public MutableLiveData<ResponseBody> mProfilePic = new MutableLiveData<>();
     public MutableLiveData<ZDOrganizationList> mOrganizationList = new MutableLiveData<>();
+    public MutableLiveData<ZDBaseException> errorMessage = new MutableLiveData<>();
 
 
-    public void getViewsList(long orgId, String department, String module) {
+
+    public void getViewsList(String orgId, String module, String departmentId) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        if(!departmentId.equals("allDepartment")) {
+            map.put("departmentId", departmentId);
+        }
         ZDViewsAPIHandler.INSTANCE.listAllView(new ZDCallback<ZDViewsList>() {
             @Override
-            public void onFailure(@Nullable Call<ZDViewsList> call, @NotNull ZDBaseException exception) {
-
+            public void onFailure(@Nullable Call<ZDViewsList> call, @NonNull ZDBaseException exception) {
+                errorMessage.postValue(exception);
             }
 
             @Override
-            public void onSuccess(@NotNull ZDResult<? extends ZDViewsList> result) {
+            public void onSuccess(@NonNull ZDResult<? extends ZDViewsList> result) {
                 ZDViewsList list = result.getData();
                 if (list != null) {
                     mViewsList.postValue(list);
                 }
             }
-        }, orgId, department, module);
+        }, orgId, module, map);
     }
 
     public void getProfileDetail() {
         ZDUtilsKt.getProfile(new ZDCallback<ZDIAMProfiles>() {
             @Override
-            public void onFailure(@Nullable Call<ZDIAMProfiles> call, @NotNull ZDBaseException exception) {
-
+            public void onFailure(@Nullable Call<ZDIAMProfiles> call, @NonNull ZDBaseException exception) {
+                errorMessage.postValue(exception);
             }
 
             @Override
-            public void onSuccess(@NotNull ZDResult<? extends ZDIAMProfiles> result) {
+            public void onSuccess(@NonNull ZDResult<? extends ZDIAMProfiles> result) {
                 ZDIAMProfiles profile = result.getData();
                 if (profile != null) {
                     mProfile.postValue(profile);
@@ -67,12 +73,12 @@ public class ViewsViewModel extends ViewModel {
     public void downloadProfilePicture(String emailId) {
         ZDUtilsKt.downloadProfilePicture(new ZDCallback<ResponseBody>() {
             @Override
-            public void onFailure(@Nullable Call<ResponseBody> call, @NotNull ZDBaseException exception) {
-
+            public void onFailure(@Nullable Call<ResponseBody> call, @NonNull ZDBaseException exception) {
+                errorMessage.postValue(exception);
             }
 
             @Override
-            public void onSuccess(@NotNull ZDResult<? extends ResponseBody> result) {
+            public void onSuccess(@NonNull ZDResult<? extends ResponseBody> result) {
                 ResponseBody responseBody = result.getData();
                 if (responseBody != null) {
                     mProfilePic.postValue(responseBody);
@@ -81,20 +87,5 @@ public class ViewsViewModel extends ViewModel {
         }, emailId);
     }
 
-    public void getOrganizationList() {
-        ZDOrganizationAPIHandler.INSTANCE.getAllOrganizations(new ZDCallback<ZDOrganizationList>() {
-            @Override
-            public void onFailure(@Nullable Call<ZDOrganizationList> call, @NotNull ZDBaseException exception) {
 
-            }
-
-            @Override
-            public void onSuccess(@NotNull ZDResult<? extends ZDOrganizationList> result) {
-                ZDOrganizationList zdOrganizationList = result.getData();
-                if (zdOrganizationList != null) {
-                    mOrganizationList.postValue(zdOrganizationList);
-                }
-            }
-        });
-    }
 }

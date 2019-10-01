@@ -39,6 +39,20 @@ public final class Constants {
             "VirtualOffice.messages.CREATE," + // No I18N
             "profile.userphoto.UPDATE," + // No I18N
             "profile.userinfo.READ," + // No I18N
+            "Desk.articles.READ," + // No I18N
+            "ZohoDiscussions.basic.ALL," + // No I18N
             "profile.orguserphoto.READ";// No I18N
 }
 
+
+//         "ZohoSupport.basic.UPDATE," + //No I18N
+//                 "Desk.articles.READ," +//No I18N
+//
+//
+//
+//         "ZIAPlatform.transcript.READ," +//No I18N
+//         "ZIAPlatform.transcript.CREATE," +//No I18N
+//         "ZIAPlatform.transcript.DELETE," +//No I18N
+//         "ZIAPlatform.users.READ," +//No I18N
+//         "DRE.dreapi.all," +//No I18N
+//         "ZohoDiscussions.basic.ALL"

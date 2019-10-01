@@ -16,4 +16,6 @@
     <string name="sign_out">Sign out</string>
     <string name="zd_views">Views</string>
     <string name="zd_ticket_detail">Ticket Detail</string>
+    <string name="zd_tickets">Tickets</string>
+    <string name="zd_all_dept">All Department</string>
 </resources>

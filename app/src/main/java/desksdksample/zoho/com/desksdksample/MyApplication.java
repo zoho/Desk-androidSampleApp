@@ -1,17 +1,16 @@
 package desksdksample.zoho.com.desksdksample;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.zoho.accounts.externalframework.ZohoErrorCodes;
 import com.zoho.accounts.externalframework.ZohoSDK;
 import com.zoho.accounts.externalframework.ZohoToken;
 import com.zoho.accounts.externalframework.ZohoTokenCallback;
-import com.zoho.desksdk.ZDAuthenticationInterface;
-import com.zoho.desksdk.ZDDOMAIN;
-import com.zoho.desksdk.ZDSdkInterface;
-import com.zoho.desksdk.ZDeskSdk;
+import com.zoho.desk.core.ZDAuthenticationInterface;
+import com.zoho.desk.core.ZDErrorOnLoginInterface;
+import com.zoho.desk.core.ZDeskSdk;
 
-import org.jetbrains.annotations.NotNull;
 
 import desksdksample.zoho.com.desksdksample.Utils.Constants;
 
@@ -25,11 +24,26 @@ public class MyApplication extends Application implements ZDAuthenticationInterf
     public void onCreate() {
         super.onCreate();
         ZohoSDK.getInstance(this).init(Constants.SCOPES, true);
-        ZDeskSdk.Companion.getInstance().init(this, this, ZDDOMAIN.US);
+        ZDeskSdk.Companion.getInstance().init(this, this);
+        ZDeskSdk.Companion.getInstance().setZdEnableLogs(true);
+        ZDeskSdk.Companion.getInstance().setErrorCallBack(new ZDErrorOnLoginInterface() {
+            @Override
+            public void onOAuthTokenInvalid(int i, @NonNull String s) {
+
+            }
+        });
+    }
+
+
+
+    @NonNull
+    @Override
+    public String getAuthToken() {
+        return   ZohoSDK.getInstance(this).getToken().getToken();
     }
 
     @Override
-    public void getAuthToken(final @NotNull ZDSdkInterface callback) {
+    public void getAuthToken(final @NonNull com.zoho.desk.core.ZDSdkInterface callback) {
         ZohoSDK.getInstance(this).getToken(new ZohoTokenCallback() {
             @Override
             public void onTokenFetchInitiated() {
