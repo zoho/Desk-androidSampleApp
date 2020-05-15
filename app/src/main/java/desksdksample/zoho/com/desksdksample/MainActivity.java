@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeSpinner(final ZDOrganizationList zdOrganizationList) {
         ArrayList<String> orgNameList = new ArrayList<>();
         for (ZDOrganization organization : zdOrganizationList.getData()) {
-            orgNameList.add(organization.getOrganizationName());
+            orgNameList.add(organization.getCompanyName());
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, orgNameList);
