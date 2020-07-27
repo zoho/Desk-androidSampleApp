@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="supportsdk" />
+                <data android:scheme="YOUR REDIR_URL" />
             </intent-filter>
         </activity>
         <activity
